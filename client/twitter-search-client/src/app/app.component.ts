@@ -26,8 +26,6 @@ export class AppComponent {
           console.log(data)
         });
         this.socket.emit('keyword', keyword);
-
-    
         this.socket.on(keyword, data => {
           data.count = this.latestData.length + 1;
           this.latestData.unshift(data);
@@ -40,7 +38,6 @@ export class AppComponent {
         console.log(data)
       });
       this.socket.emit('authenticate', {});
-      
     });
     
   }
