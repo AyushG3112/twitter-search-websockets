@@ -19,14 +19,29 @@ export class AppComponent {
   ngOnInit() {
     const keyword = 'NFC';
     this.socket = io(environment.socketUri);
-    this.socket.on('connect', function() {
-      console.log('connected');
-    });
-    this.socket.emit('keyword', keyword);
+    this.socket.on('connect', () => {
+      this.socket.on('authSuccess', (data) => {
+        console.log(data)
+        this.socket.on('unauthenticated', data => {
+          console.log(data)
+        });
+        this.socket.emit('keyword', keyword);
 
-    this.socket.on(keyword, data => {
-      data.count = this.latestData.length + 1;
-      this.latestData.unshift(data);
+    
+        this.socket.on(keyword, data => {
+          data.count = this.latestData.length + 1;
+          this.latestData.unshift(data);
+        });
+      })
+      this.socket.on('authFailure', (data) => {
+        console.log(data);
+      })
+      this.socket.on('unauthenticated', data => {
+        console.log(data)
+      });
+      this.socket.emit('authenticate', {});
+      
     });
+    
   }
 }

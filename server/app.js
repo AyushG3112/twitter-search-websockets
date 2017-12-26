@@ -7,15 +7,24 @@ io.on('connection', client => {
   const eventEmitter = new EventEmitter();
   const searcher = new TwitterSearcher();
   searcher.setEventEmitter(eventEmitter);
+  let isAuthenticated = false;
+  client.on('authenticate', (authParams) => {
+    isAuthenticated = true;
+    client.emit('authSuccess', 'Authentication Success')
+    // client.emit('authFailure', 'Authentication Success')
+  })
   client.on('keyword', keyword => {
-    console.log(keyword);
-    if (searcher.getKeyword()) {
-      eventEmitter.removeAllListeners(searcher.getKeyword());
+    if(!isAuthenticated) {
+      client.emit('unauthenticated', 'Not Authenticated')
+    } else {
+      if (searcher.getKeyword()) {
+        eventEmitter.removeAllListeners(searcher.getKeyword());
+      }
+  
+      eventEmitter.on(keyword, data => client.emit(keyword, data));
+      searcher.setKeyword(keyword);
+      searcher.start();
     }
-
-    eventEmitter.on(keyword, data => io.emit(keyword, data));
-    searcher.setKeyword(keyword);
-    searcher.start();
   });
 
   client.on('disconnect', () => {

@@ -1,4 +1,4 @@
-isNullOrUndefined = require('util').isNullOrUndefined;
+const isNullOrUndefined = require('util').isNullOrUndefined;
 
 class TwitterSearcher {
   constructor(port) {
