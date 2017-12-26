@@ -1,0 +1,23 @@
+{
+  "name": "twitter-search-websockets",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AyushG3112/twitter-search-websockets.git"
+  },
+  "author": "Ayush Gupta",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AyushG3112/twitter-search-websockets/issues"
+  },
+  "homepage": "https://github.com/AyushG3112/twitter-search-websockets#readme",
+  "description": "",
+  "dependencies": {
+    "socket.io": "^2.0.4"
+  }
+}
