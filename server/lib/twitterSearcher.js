@@ -31,7 +31,7 @@ class TwitterSearcher {
       keyword => {
         this._eventEmitter.emit(keyword, { status: true, keyword });
       },
-      100,
+      1000,
       this._keyword
     );
   }

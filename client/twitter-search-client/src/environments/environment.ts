@@ -5,5 +5,8 @@
 
 export const environment = {
   production: false,
-  socketUri: 'http://localhost:9000/'
+  socketUri: 'http://localhost:9000/',
+  authKey: {
+    authToken: '123456'
+  }
 };
